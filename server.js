@@ -39,6 +39,16 @@ app.get('/', (req, res)=> {
   res.send('Chat app')
 })
 
+app.use((req, res, next) => {
+  res.set({
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Content-Type, access_token",
+      "Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"
+  })
+
+  next()
+})
+
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true
